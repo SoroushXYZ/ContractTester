@@ -15,13 +15,16 @@
     "@thirdweb-dev/sdk": "^4",
     "ethers": "^5",
     "next": "^13",
-    "react": "^18.2",
+    "prismjs": "^1.29.0",
+    "react": "^18.2.0",
     "react-dom": "^18.2",
     "react-particles": "^2.12.2",
+    "react-simple-code-editor": "^0.13.1",
     "tsparticles": "^2.12.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.11",
+    "@types/prismjs": "^1.26.3",
     "@types/react": "^18",
     "eslint": "^8.29.0",
     "eslint-config-next": "^13",

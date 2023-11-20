@@ -4,10 +4,8 @@ import Navbar from "../components/navbar/Navbar";
 import ParticleBackground from "../components/background/ParticleBackground";
 import "../styles/bootstrap.min.css";
 import "../styles/globals.css";
+import "../styles/prism-synthwave84.css";
 
-// This is the chain your dApp will work on.
-// Change this to the chain your app is built for.
-// You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
 const activeChain = "ethereum";
 
 function MyApp({ Component, pageProps }: AppProps) {

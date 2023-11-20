@@ -45,3 +45,20 @@ body {
 .json-null {
   color: #808080; /* Gray for null values */
 }
+
+.container_editor_area {
+  tab-size: 4ch;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.container__editor {
+  font-size: 12px;
+  font-variant-ligatures: common-ligatures;
+  background-color: rgb(73, 49, 121);
+  border-radius: 3px;
+}
+
+.container__editor textarea {
+  outline: 0;
+}
