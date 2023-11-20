@@ -125,7 +125,7 @@
         "radius": 60
       },
       "grab": {
-        "distance": 100,
+        "distance": 120,
         "links": {
           "blink": false,
           "consent": false,

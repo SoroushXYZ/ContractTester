@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ConnectWallet } from "@thirdweb-dev/react";
 
 const Navbar: React.FC = () => {
 
@@ -12,9 +13,9 @@ const Navbar: React.FC = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                {/* <a className="navbar-brand" href="#">
                 Navbar
-                </a>
+                </a> */}
                 <button
                 className="navbar-toggler"
                 type="button"
@@ -33,7 +34,7 @@ const Navbar: React.FC = () => {
                 >
                 <ul className="navbar-nav me-auto">
                     <li className="nav-item">
-                    <a className="nav-link active" href="#">
+                    <a className="nav-link active" href="/">
                         Home
                         <span className="visually-hidden">(current)</span>
                     </a>
@@ -81,16 +82,9 @@ const Navbar: React.FC = () => {
                     </div>
                     </li>
                 </ul>
-                <form className="d-flex">
-                    <input
-                    className="form-control me-sm-2"
-                    type="search"
-                    placeholder="Search"
-                    />
-                    <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-                    Search
-                    </button>
-                </form>
+                </div>
+                <div className='mx-1'>
+                    <ConnectWallet />
                 </div>
             </div>
         </nav>

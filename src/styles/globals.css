@@ -20,3 +20,28 @@ body {
   color: #e7e8e8;
   background: #070707;
 }
+
+.bg-dark2 {
+  background-color: #280843; /* Replace 'yourCustomColor' with your desired color value */
+}
+
+.json-input {
+  font-family: 'Courier New', monospace; /* Use a monospaced font for even spacing */
+  color: #008000; /* Green for property names */
+}
+
+.json-string {
+  color: #d14; /* Red for string values */
+}
+
+.json-number {
+  color: #0086b3; /* Blue for numeric values */
+}
+
+.json-boolean {
+  color: #800080; /* Purple for boolean values */
+}
+
+.json-null {
+  color: #808080; /* Gray for null values */
+}

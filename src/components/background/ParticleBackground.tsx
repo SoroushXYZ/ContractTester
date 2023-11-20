@@ -1,4 +1,3 @@
-// App.tsx
 import React, { useCallback } from 'react';
 
 import Particles from 'react-particles';
