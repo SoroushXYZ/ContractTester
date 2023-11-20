@@ -1,31 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs';
-
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-json';
-
 import sampleABI from './sampleABI.json'
 
-export function ContractManager() {
-    const [contractAddress, setContractAddress] = useState('');
-    
+import { VscDebugDisconnect } from "react-icons/vsc";
 
+import { useChain } from "@thirdweb-dev/react";
+
+export function ContractManager() {
+    const selectedChain = useChain();
+
+    const [contractAddress, setContractAddress] = useState('');
     const [abiInput, setAbiInput] = React.useState(
-        // `function add(a, b) {\n  return a + b;\n}`
         JSON.stringify(sampleABI, null, 2)
-      );
+    );
 
     const handleContractAddressChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setContractAddress(event.target.value);
     };
-    
     const handleAddContractButton = () => {
         // Perform actions when the "Add Contract" button is clicked
         // For example, you can add logic to handle contract addition
-        console.log('Contract added!');
-      };
+        console.log(selectedChain);
+    };
 
     return (
         <div className="container px-lg-5">
@@ -54,9 +54,15 @@ export function ContractManager() {
                             <input className="p-3 form-control" aria-describedby="Contract Address" placeholder="0x0000000000000000000000000000000000000000" value={contractAddress} onChange={handleContractAddressChange}/>
                         </div>
                         <div className="p-4 mt-4 row justify-content-center">
-                            <div className="col-lg-8 p-4 bg-dark2 rounded-3 d-flex align-items-center justify-content-between">
-                                <span>Chain ID</span>
-                                <span>0</span>
+                            <div className="col-lg-8 px-4 py-3 bg-dark2 rounded-3">
+                                <div className="p-2 d-flex align-items-center justify-content-between">
+                                    <span>Chain</span>
+                                    <span>{selectedChain?.chain || <VscDebugDisconnect size={30} />}</span>
+                                </div>
+                                <div className="p-2 d-flex align-items-center justify-content-between">
+                                    <span>Chain ID</span>
+                                    <span>{selectedChain?.chainId || <VscDebugDisconnect size={30} />}</span>
+                                </div>
                             </div>
                         </div>
                         <div className="p-4 row justify-content-center">
