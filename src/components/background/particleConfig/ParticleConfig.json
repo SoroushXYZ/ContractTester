@@ -332,7 +332,7 @@
         "width": 1920,
         "height": 1080
       },
-      "limit": 0,
+      "limit": 400,
       "value": 200
     },
     "opacity": {
