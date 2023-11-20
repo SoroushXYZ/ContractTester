@@ -6,7 +6,7 @@ const Home: NextPage = () => {
   return (
     <div>
         {/* Header */}
-        <div style={{ padding: '3vw' }}></div>
+        <div style={{ padding: '2rem' }}></div>
         <header className="py-5">
             <div className="container  px-lg-5">
                 <div className="p-4 p-lg-5 text-center">
@@ -22,10 +22,10 @@ const Home: NextPage = () => {
                 </div>
             </div>
         </header>
-        <div style={{ padding: '3vw' }}></div>
+        <div style={{ padding: '5rem' }}></div>
 
         {/* Contract Manager */}
-        <div style={{ padding: '2vw' }}></div>
+        <div style={{ padding: '2rem' }}></div>
         <ContractManager />
 
     </div>
