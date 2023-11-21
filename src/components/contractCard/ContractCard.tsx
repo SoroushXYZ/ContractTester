@@ -48,15 +48,16 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
       }
     
     const readFunctions = abi.filter((item: { constant: any; }) => item.constant);
-    const writeFunctions = abi.filter((item: { constant: any; }) => !item.constant);
+    const writeFunctions = abi.filter(
+        (item: { constant: any; type: string }) =>
+          !item.constant
+          && item.type !== 'fallback' //Used to ignore the fallback function.
+          && item.type !== 'constructor' //Used to ignore the constructor function.
+      );
     
 
     return (
     <div>
-        {/* {chain}
-        <h1>{id}</h1>
-        <button onClick={() => onDelete(id)}>asdf</button> */}
-
         <div className='px-4 py-2 mt-4 bg-dark2 rounded-4'>
             <div className='row align-items-center justify-content-between'>
                 <div className='col-5 col-lg-3'>
@@ -78,11 +79,11 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
                 </div>
                 <div className='col-2 col-lg-2 '>
                     <div className='row align-items-center text-center'>
-                        <div className='col-7 col-lg-7 p-1 p-lg-3'>
+                        <div className='col-7 col-lg-7 p-1 p-lg-4'>
                             <MediaRenderer src={chainInfo.imgUrl} style={{ width: "100%", height: "100%"}}/>
                         </div>
-                        <div className='col-5 col-lg-5 p-1' style={{ cursor: 'pointer' }} onClick={() => onDelete(id)}>
-                            <MdOutlineDelete className='p-1' size={32} />
+                        <div className='col-5 col-lg-5 p-1'>
+                            <MdOutlineDelete className='p-1' style={{ cursor: 'pointer' }} onClick={() => onDelete(id)} size={32} />
                         </div>
                     </div>
                 </div>
@@ -92,17 +93,33 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
             <div className="mt-3">
                 <hr />
                 <div>
-                    <div>
-                        <h3>Read Functions</h3>
-                        {readFunctions.map((func: any) => (
-                        <ContractFunctions key={func.name} name={func.name} type="read" inputs={func.inputs || []} />
-                        ))}
+                    <h3 className='mt-2'>Read Functions</h3>
+                    <div className='row'>
+                        <div className='col-12 col-lg-8'>
+                            {readFunctions.map((func: any, index: number) => (
+                                <React.Fragment key={func.name}>
+                                    <ContractFunctions name={func.name} type="read" inputs={func.inputs || []} />
+                                    {index !== readFunctions.length - 1 && <hr className='mt-3' style={{ width: "60%", margin: "auto" }} />}
+                                </React.Fragment>
+                            ))}
+                        </div>
+                        <div className='col-12 col-lg-4 mt-3 mt-lg-0 bg-dark'>
+                            <h1>Terminal</h1>
+                        </div>
                     </div>
-                    <div>
-                        <h3>Write Functions</h3>
-                        {writeFunctions.map((func: any) => (
-                        <ContractFunctions key={func.name} name={func.name} type="write" inputs={func.inputs || []} />
-                        ))}
+                    <h3 className='mt-5'>Write Functions</h3>
+                    <div className='row'>
+                        <div className='col-12 col-lg-8'>
+                            {writeFunctions.map((func: any, index: number) => (
+                                <React.Fragment key={func.name}>
+                                    <ContractFunctions name={func.name} type="write" inputs={func.inputs || []} />
+                                    {index !== writeFunctions.length - 1 && <hr className='mt-3' style={{ width: "90%", margin: "auto" }} />}
+                                </React.Fragment>
+                            ))}
+                        </div>
+                        <div className='col-12 col-lg-4 mt-3 mt-lg-0 bg-dark'>
+                            <h1>Terminal</h1>
+                        </div>
                     </div>
                 </div>
             </div>
