@@ -27,6 +27,7 @@ const Home: NextPage = () => {
         {/* Contract Manager */}
         <div style={{ padding: '2rem' }}></div>
         <ContractManager />
+        <div style={{ padding: '2rem' }}></div>
 
     </div>
   );

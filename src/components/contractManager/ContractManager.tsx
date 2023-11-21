@@ -5,10 +5,9 @@ import { highlight, languages } from 'prismjs';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-json';
 import sampleABI from './sampleABI.json'
-
 import { VscDebugDisconnect } from "react-icons/vsc";
-
 import { useChain } from "@thirdweb-dev/react";
+import ContractCard from "../contractCard/ContractCard";
 
 export function ContractManager() {
     const selectedChain = useChain();
@@ -17,14 +16,18 @@ export function ContractManager() {
     const [abiInput, setAbiInput] = React.useState(
         JSON.stringify(sampleABI, null, 2)
     );
+    const [contractCardComponents, setContractCardComponents] = useState<{ id: number; chain: string }[]>([]);
 
     const handleContractAddressChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setContractAddress(event.target.value);
     };
     const handleAddContractButton = () => {
-        // Perform actions when the "Add Contract" button is clicked
-        // For example, you can add logic to handle contract addition
-        console.log(selectedChain);
+        const newId = contractCardComponents.length > 0 ? Math.max(...contractCardComponents.map(child => child.id), 0) + 1 : 1; // Generate a new ID greater than existing IDs or start at 1 if no elements exist
+        setContractCardComponents(prevState => [...prevState, { id: newId, chain: selectedChain?.chain || "" }]);
+    };
+    const handleDeleteContractButton = (index: number) => {
+        const updatedChildren = contractCardComponents.filter(child => child.id !== index);
+        setContractCardComponents(updatedChildren);
     };
 
     return (
@@ -71,8 +74,22 @@ export function ContractManager() {
                             </button>
                         </div>
                     </div>
-
                 </div>
+                {contractCardComponents.length > 0 && (
+                    <div className="mt-5">
+                        <hr />
+                        <div>
+                        {contractCardComponents.map((index) => (
+                            <ContractCard 
+                                key={index.id}
+                                id={index.id}
+                                chain={index.chain}
+                                onDelete={handleDeleteContractButton}
+                            />
+                        ))}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
