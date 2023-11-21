@@ -11,6 +11,7 @@
     "deploy": "next build && next export && npx thirdweb@latest upload out"
   },
   "dependencies": {
+    "@sweetalert2/theme-dark": "^5.0.15",
     "@thirdweb-dev/react": "^4",
     "@thirdweb-dev/sdk": "^4",
     "ethers": "^5",
@@ -21,6 +22,7 @@
     "react-icons": "^4.12.0",
     "react-particles": "^2.12.2",
     "react-simple-code-editor": "^0.13.1",
+    "sweetalert2": "^11.10.1",
     "tsparticles": "^2.12.0"
   },
   "devDependencies": {

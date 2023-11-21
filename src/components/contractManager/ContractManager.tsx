@@ -7,28 +7,74 @@ import 'prismjs/components/prism-json';
 import sampleABI from './sampleABI.json'
 import { VscDebugDisconnect } from "react-icons/vsc";
 import { useChain } from "@thirdweb-dev/react";
+import Swal from "sweetalert2";
+import "@sweetalert2/theme-dark";
 import ContractCard from "../contractCard/ContractCard";
 
 export function ContractManager() {
+    
     const selectedChain = useChain();
 
-    const [contractAddress, setContractAddress] = useState('');
+    const [contractAddress, setContractAddress] = useState('0xD89eD620fa291360593c5Eb37bcDf8C2f1Deb5db');
     const [abiInput, setAbiInput] = React.useState(
         JSON.stringify(sampleABI, null, 2)
     );
-    const [contractCardComponents, setContractCardComponents] = useState<{ id: number; chain: string }[]>([]);
+    const [contractCardComponents, setContractCardComponents] = useState<{ id: number; chainInfo: { id: number; name: string; imgUrl: string; }; abi: JSON, contractAddress: string }[]>([]);
 
     const handleContractAddressChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
         setContractAddress(event.target.value);
     };
     const handleAddContractButton = () => {
+        if(!selectedChain){
+            Swal.fire(
+                "Error",
+                "Wallet not connected or unsupported chain.",
+                "error"
+              );
+            return;
+        }else if(!contractAddress){
+            Swal.fire(
+                "Error",
+                "Contract Address not provided!",
+                "error"
+              );
+            return;
+        }
+        
+        let parsedABI: JSON
+        try{
+            parsedABI = JSON.parse(abiInput)
+        }catch (e) {
+            Swal.fire(
+                "Failed to parse ABI to JSON",
+                String(e),
+                "error"
+              );
+            return;
+        }
+
+        const chainInfo = {
+            id: selectedChain.chainId,
+            name: selectedChain.name,
+            imgUrl: selectedChain.icon?.url || "",
+        };
         const newId = contractCardComponents.length > 0 ? Math.max(...contractCardComponents.map(child => child.id), 0) + 1 : 1; // Generate a new ID greater than existing IDs or start at 1 if no elements exist
-        setContractCardComponents(prevState => [...prevState, { id: newId, chain: selectedChain?.chain || "" }]);
+        setContractCardComponents(prevState => [...prevState, { id: newId, chainInfo: chainInfo || {}, abi: parsedABI, contractAddress}]);
     };
     const handleDeleteContractButton = (index: number) => {
         const updatedChildren = contractCardComponents.filter(child => child.id !== index);
         setContractCardComponents(updatedChildren);
     };
+
+    useEffect(() => {
+        if(selectedChain){
+            handleAddContractButton()
+        }
+        
+        return () => {
+            console.log("Use this return as a 'clean up tool' (this runs before the actual code)")
+        }
+    }, [selectedChain]);
 
     return (
         <div className="container px-lg-5">
@@ -83,7 +129,9 @@ export function ContractManager() {
                             <ContractCard 
                                 key={index.id}
                                 id={index.id}
-                                chain={index.chain}
+                                chainInfo={index.chainInfo}
+                                abi={index.abi}
+                                contractAdress={index.contractAddress}
                                 onDelete={handleDeleteContractButton}
                             />
                         ))}
