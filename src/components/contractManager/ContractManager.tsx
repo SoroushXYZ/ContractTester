@@ -97,7 +97,7 @@ export function ContractManager() {
                     </div>
                     <div className="col-lg-6 px-4 mt-4 mt-lg-0 d-flex flex-column justify-content-center">
                         <div>
-                            <label htmlFor="exampleTextarea" className="form-label">
+                            <label className="form-label">
                                 Contract Address
                             </label>
                             <input className="p-3 form-control" aria-describedby="Contract Address" placeholder="0x0000000000000000000000000000000000000000" value={contractAddress} onChange={handleContractAddressChange}/>

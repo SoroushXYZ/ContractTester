@@ -20,15 +20,23 @@ const ContractFunctions: React.FC<ContractFunctionsProps> = ({ name, type, input
   };
 
   return (
-    <div key={name}>
-      <h3>{name}</h3>
-      {inputs.map((input) => (
-        <div key={input.name}>
-          <label>{input.name}</label>
-          <input type="text" value={inputValues[input.name] || ''} onChange={(e) => handleInputChange(input.name, e.target.value)} />
+    <div>
+      <div className='row align-items-center mt-3' key={name}>
+        <p className='col-4 col-lg-3 my-0'>{name}</p>
+        <button className='col-2 btn btn-secondary' onClick={handleButtonClick}>{type === 'read' ? 'Read' : 'Write'}</button>
+        <div className='col-6 col-lg'>
+          {inputs.map((input) => (
+            <div className="col-12 px-lg-4 my-1 form-floating" key={input.name}>
+                {/* <input className="p-1 form-control" type="text" value={inputValues[input.name] || ''} onChange={(e) => handleInputChange(input.name, e.target.value)}/>
+                <label>
+                  {input.name}
+                </label> */}
+              <input type="text" className="form-control" id="floatingInput" placeholder="" value={inputValues[input.name] || ''} onChange={(e) => handleInputChange(input.name, e.target.value)}/>
+              <label className='mx-lg-4' htmlFor="floatingInput">{input.name}({input.type})</label>
+            </div>
+          ))}
         </div>
-      ))}
-      <button onClick={handleButtonClick}>{type === 'read' ? 'Read' : 'Write'}</button>
+      </div>
     </div>
   );
 };
