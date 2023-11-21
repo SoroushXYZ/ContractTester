@@ -99,7 +99,7 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
                             {readFunctions.map((func: any, index: number) => (
                                 <React.Fragment key={func.name}>
                                     <ContractFunctions name={func.name} type="read" inputs={func.inputs || []} />
-                                    {index !== readFunctions.length - 1 && <hr className='mt-3' style={{ width: "60%", margin: "auto" }} />}
+                                    {index !== readFunctions.length - 1 && <hr className='mt-3' style={{ width: "90%", margin: "auto" }} />}
                                 </React.Fragment>
                             ))}
                         </div>
