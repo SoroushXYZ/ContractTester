@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import "@sweetalert2/theme-dark";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
+import ContractFunctions from '../contractFunctions/ContractFunctions';
 
 
 interface ContractCardProps {
@@ -44,6 +45,10 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
         const suffix = address.slice(-5);
         return `${prefix}...${suffix}`;
       }
+    
+    const readFunctions = abi.filter((item: { constant: any; }) => item.constant);
+    const writeFunctions = abi.filter((item: { constant: any; }) => !item.constant);
+    
 
     return (
     <div>
@@ -78,8 +83,20 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
             /* Your additional elements here */
             <div className="mt-3">
                 <hr />
-                {/* Additional content */}
-                <h1>asdfasdfasda</h1>
+                <div>
+                    <div>
+                        <h3>Read Functions</h3>
+                        {readFunctions.map((func: any) => (
+                        <ContractFunctions key={func.name} name={func.name} type="read" inputs={func.inputs || []} />
+                        ))}
+                    </div>
+                    <div>
+                        <h3>Write Functions</h3>
+                        {writeFunctions.map((func: any) => (
+                        <ContractFunctions key={func.name} name={func.name} type="write" inputs={func.inputs || []} />
+                        ))}
+                    </div>
+                </div>
             </div>
             )}
         </div>
