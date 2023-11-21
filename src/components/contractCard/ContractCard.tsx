@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import "@sweetalert2/theme-dark";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
+import { MdOutlineDelete } from "react-icons/md";
 import ContractFunctions from '../contractFunctions/ContractFunctions';
 
 
@@ -75,8 +76,15 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
                 <div className='col-5 text-center'>
                     <h6 className='m-0'>{chainInfo.name}</h6>
                 </div>
-                <div className='col-2 col-lg-1 p-2'>
-                    <MediaRenderer src={chainInfo.imgUrl} style={{ width: "100%", height: "100%"}}/>
+                <div className='col-2 col-lg-2 '>
+                    <div className='row align-items-center text-center'>
+                        <div className='col-7 col-lg-7 p-1 p-lg-3'>
+                            <MediaRenderer src={chainInfo.imgUrl} style={{ width: "100%", height: "100%"}}/>
+                        </div>
+                        <div className='col-5 col-lg-5 p-1' style={{ cursor: 'pointer' }} onClick={() => onDelete(id)}>
+                            <MdOutlineDelete className='p-1' size={32} />
+                        </div>
+                    </div>
                 </div>
             </div>
             {showAdditionalElements && (
