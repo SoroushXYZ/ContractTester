@@ -8,6 +8,7 @@ import "../styles/prism-synthwave84.css";
 import ActiveChain from "../components/ActiveChain/ActiveChain";
 import { useState } from "react";
 import Footer from "../components/footer/Footer";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [activeChain, setActiveChain] = useState("arbitrum");
@@ -18,6 +19,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       activeChain={activeChain}
     >
       <ActiveChain setActiveChain={setActiveChain}/>
+      <Head>
+        <title>Contract Tester</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <ParticleBackground />
       <Navbar />
       <Component {...pageProps} />
