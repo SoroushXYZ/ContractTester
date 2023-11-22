@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ConnectWallet } from "@thirdweb-dev/react";
+import { FaGithub } from "react-icons/fa";
 
 const Navbar: React.FC = () => {
 
@@ -9,6 +10,12 @@ const Navbar: React.FC = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    const scrollToFooter = () => {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth',
+        });
+      };
 
     return (
         <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
@@ -40,46 +47,14 @@ const Navbar: React.FC = () => {
                     </a>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="#">
-                        Features
+                    <a onClick={scrollToFooter} className="nav-link active" style={{cursor: "pointer"}}>
+                        Contact Me
                     </a>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="#">
-                        Pricing
+                    <a className="nav-link" href="https://github.com/SoroushXYZ">
+                        <FaGithub size={30} />
                     </a>
-                    </li>
-                    <li className="nav-item">
-                    <a className="nav-link" href="#">
-                        About
-                    </a>
-                    </li>
-                    <li className="nav-item dropdown">
-                    <a
-                        className="nav-link dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        href="#"
-                        role="button"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                    >
-                        Dropdown
-                    </a>
-                    <div className="dropdown-menu">
-                        <a className="dropdown-item" href="#">
-                        Action
-                        </a>
-                        <a className="dropdown-item" href="#">
-                        Another action
-                        </a>
-                        <a className="dropdown-item" href="#">
-                        Something else here
-                        </a>
-                        <div className="dropdown-divider" />
-                        <a className="dropdown-item" href="#">
-                        Separated link
-                        </a>
-                    </div>
                     </li>
                 </ul>
                 </div>

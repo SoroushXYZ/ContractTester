@@ -15,7 +15,7 @@ export function ContractManager() {
     
     const selectedChain = useChain();
 
-    const [contractAddress, setContractAddress] = useState('0x55d398326f99059fF775485246999027B3197955');
+    const [contractAddress, setContractAddress] = useState('');
     const [abiInput, setAbiInput] = React.useState(
         JSON.stringify(sampleABI, null, 2)
     );

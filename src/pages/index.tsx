@@ -1,8 +1,11 @@
 // import { ContractManager } from './../components/contractManager/ContractManager';
+import { useRef } from "react";
 import { ContractManager } from "../components/contractManager/ContractManager";
 import { NextPage } from "next";
 
 const Home: NextPage = () => {
+  const contractManagerRef = useRef<HTMLDivElement>(null);
+  
   return (
     <div>
         {/* Header */}
@@ -15,7 +18,11 @@ const Home: NextPage = () => {
                         <p className="fs-4">
                         This App simplifies testing and validating smart contracts deployed on EVM chains, providing an intuitive interface for easy interaction and thorough functionality assessment.
                         </p>
-                        <a className="btn btn-primary btn-lg" href="#!">
+                        <a onClick={() => {
+                            if (contractManagerRef.current) {
+                                contractManagerRef.current.scrollIntoView({ behavior: 'smooth' });
+                            }
+                            }} className="btn btn-primary btn-lg">
                         Click To Begin
                         </a>
                     </div>
@@ -25,7 +32,7 @@ const Home: NextPage = () => {
         <div style={{ padding: '5rem' }}></div>
 
         {/* Contract Manager */}
-        <div style={{ padding: '2rem' }}></div>
+        <div ref={contractManagerRef} style={{ padding: '2rem' }}></div>
         <ContractManager />
         <div style={{ padding: '2rem' }}></div>
 
