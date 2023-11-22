@@ -1,4 +1,4 @@
-# My Next.js Smart Contract Interaction App
+# Smart Contract Interaction App
 
 This Next.js TypeScript application allows you to interact with smart contracts on various blockchains. It utilizes the [ThirdWeb library](https://github.com/thirdweb-dev) to manage blockchain functionality.
 
