@@ -1,40 +1,38 @@
-## Getting Started
+# My Next.js Smart Contract Interaction App
 
-Create a project using this example:
+This Next.js TypeScript application allows you to interact with smart contracts on various blockchains. It utilizes the [ThirdWeb library](https://github.com/thirdweb-dev) to manage blockchain functionality.
 
-```bash
-npx thirdweb create --template next-typescript-starter
+## Usage
+
+1. Install dependencies:
+
+```
+npm install
 ```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+2. Run the application:
 
-On `pages/_app.tsx`, you'll find our `ThirdwebProvider` wrapping your app, this is necessary for our [hooks](https://portal.thirdweb.com/react) and
-[UI Components](https://portal.thirdweb.com/ui-components) to work.
-
-## Environment Variables
-
-To run this project, you will need to add environment variables. Check the `.env.example` file for all the environment variables required and add it to `.env.local` file or set them up on your hosting provider.
-
-## Deploy to IPFS
-
-Deploy a copy of your application to IPFS using the following command:
-
-```bash
-yarn deploy
+```
+npm run dev
 ```
 
-## Learn More
+## Setup
 
-To learn more about thirdweb and Next.js, take a look at the following resources:
+To utilize the blockchain functionalities, you need to set up your ThirdWeb API key in the `.env` file:
 
-- [thirdweb React Documentation](https://docs.thirdweb.com/react) - learn about our React SDK.
-- [thirdweb TypeScript Documentation](https://docs.thirdweb.com/typescript) - learn about our JavaScript/TypeScript SDK.
-- [thirdweb Portal](https://docs.thirdweb.com) - check our guides and development resources.
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Templates](https://thirdweb.com/templates)
+```env
+NEXT_PUBLIC_TEMPLATE_CLIENT_ID="your-api-key"
+```
 
-You can check out [the thirdweb GitHub organization](https://github.com/thirdweb-dev) - your feedback and contributions are welcome!
+## Blockchain Interactions
 
-## Join our Discord!
+- Use any supported blockchain.
+- Provide the contract address and ABI to access its functions.
 
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
+## ThirdWeb Library
+
+The app leverages the [ThirdWeb library](https://github.com/thirdweb-dev) for blockchain handling.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
