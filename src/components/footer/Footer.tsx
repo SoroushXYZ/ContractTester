@@ -2,7 +2,6 @@ import React from 'react'
 import { FaGithub } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { BiSolidCoffee } from "react-icons/bi";
-import Image from 'next/image'
 
 function Footer() {
   return (
@@ -15,7 +14,7 @@ function Footer() {
             </a>
           </div>
           <div className="col-6 text-center">
-          <Image src="/images/XYZ.png" alt="XYZ Logo" width={60} height={60} />
+          <img src="./images/XYZ.png" alt="XYZ Logo" width={60} height={60} />
           </div>
         </div>
         <div className="row mt-3">
