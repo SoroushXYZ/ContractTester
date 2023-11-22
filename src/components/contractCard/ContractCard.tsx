@@ -30,7 +30,7 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
     const [readConsoleText, setReadConsoleText] = useState("Logger for solidity `view` functions");
     const [writeConsoleText, setWriteConsoleText] = useState("Logger for solidity `write` functions");
 
-    const [showAdditionalElements, setShowAdditionalElements] = useState(true);
+    const [showAdditionalElements, setShowAdditionalElements] = useState(false);
 
     const toggleAdditionalElements = () => {
         setShowAdditionalElements(prevState => !prevState);
@@ -115,9 +115,9 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
                     {value: paybleValue}
                 );
             }
-            console.log(results)
         }catch (e){
             logToConsole(funcName + " =>\n" + String(e), type);
+            console.error(e)
             return;
         }
         logToConsole(funcName + " =>\n" + results, type);

@@ -66,16 +66,6 @@ export function ContractManager() {
         setContractCardComponents(updatedChildren);
     };
 
-    // useEffect(() => {
-    //     if(selectedChain){
-    //         handleAddContractButton()
-    //     }
-        
-    //     return () => {
-    //         console.log("Use this return as a 'clean up tool' (this runs before the actual code)")
-    //     }
-    // }, [selectedChain]);
-
     return (
         <div className="container px-lg-5">
             <h2 className="p-3 text-white fw-bold">Contract Manager</h2>
