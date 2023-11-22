@@ -7,11 +7,6 @@ import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineClear } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
 import ContractFunctions from '../contractFunctions/ContractFunctions';
-import Editor from 'react-simple-code-editor';
-import { highlight, languages } from 'prismjs';
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-json';
-import sampleABI from '../contractManager/sampleABI.json'
 
 
 interface ContractCardProps {
@@ -101,7 +96,7 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
     }
 
     async function handleFunctionCallButton(funcName: string, inputValues: { [key: string]: string; }, type: string, paybleValue: string): Promise<void> {
-        if(isContractInstanceLoading || !contractAdress){
+        if(isContractInstanceLoading || !connectedWalletAddress){
             return;
         }else if(selectedChain?.chainId != chainInfo.id){
             switchToThisChain();
