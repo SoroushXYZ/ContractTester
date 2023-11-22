@@ -15,7 +15,7 @@ export function ContractManager() {
     
     const selectedChain = useChain();
 
-    const [contractAddress, setContractAddress] = useState('0xD89eD620fa291360593c5Eb37bcDf8C2f1Deb5db');
+    const [contractAddress, setContractAddress] = useState('0x55d398326f99059fF775485246999027B3197955');
     const [abiInput, setAbiInput] = React.useState(
         JSON.stringify(sampleABI, null, 2)
     );
@@ -66,15 +66,15 @@ export function ContractManager() {
         setContractCardComponents(updatedChildren);
     };
 
-    useEffect(() => {
-        if(selectedChain){
-            handleAddContractButton()
-        }
+    // useEffect(() => {
+    //     if(selectedChain){
+    //         handleAddContractButton()
+    //     }
         
-        return () => {
-            console.log("Use this return as a 'clean up tool' (this runs before the actual code)")
-        }
-    }, [selectedChain]);
+    //     return () => {
+    //         console.log("Use this return as a 'clean up tool' (this runs before the actual code)")
+    //     }
+    // }, [selectedChain]);
 
     return (
         <div className="container px-lg-5">

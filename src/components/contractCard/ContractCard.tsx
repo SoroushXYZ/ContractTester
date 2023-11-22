@@ -75,14 +75,13 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
         }
     }
 
-    function handleFunctionCallButton(funcName: string, inputValues: { [key: string]: string; }, type: string, paybleValue: string): void {
+    async function handleFunctionCallButton(funcName: string, inputValues: { [key: string]: string; }, type: string, paybleValue: string): Promise<void> {
         if(isContractInstanceLoading || !contractAdress){
             return;
         }else if(selectedChain?.chainId != chainInfo.id){
             switchToThisChain();
             return;
         }
-        console.log(paybleValue)
 
         let data = [];
         for(var i in inputValues) {
@@ -90,19 +89,23 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
                 data.push(inputValues[i]);
             }
         }
-        // console.log(data);
 
-        // let results;
-        // try{
-        //     results = (
-        //         await contractInstance?.call(funcName, [
-        //         connectedWalletAddress,
-        //         abi
-        //         ])
-        //     );
-        // }catch{
-
-        // }
+        let results;
+        try{
+            if(Number(paybleValue) < 0){
+                results = (
+                    await contractInstance?.call(funcName, data)
+                );
+            }else{
+                results = (
+                    await contractInstance?.call(funcName, data),
+                    {value: paybleValue}
+                );
+            }
+            console.log(results)
+        }catch (e){
+            console.log(e)
+        }
     }
 
     return (

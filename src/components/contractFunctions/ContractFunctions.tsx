@@ -12,7 +12,7 @@ interface ContractFunctionsProps {
 
 const ContractFunctions: React.FC<ContractFunctionsProps> = ({ name, type, inputs, isPayable, onFuncall}) => {
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
-  const [paybleValue, setPayableValue] = useState("0");
+  const [paybleValue, setPayableValue] = useState(isPayable ? "0" : "-1");
 
   const handleInputValuesChange = (inputName: string, value: string) => {
     setInputValues((prev) => ({ ...prev, [inputName]: value }));
