@@ -25,6 +25,10 @@ body {
   background-color: #280843; /* Replace 'yourCustomColor' with your desired color value */
 }
 
+.bg-dark3 {
+  background-color: #8f29e4; /* Replace 'yourCustomColor' with your desired color value */
+}
+
 .json-input {
   font-family: 'Courier New', monospace; /* Use a monospaced font for even spacing */
   color: #008000; /* Green for property names */
@@ -61,4 +65,37 @@ body {
 
 .container__editor textarea {
   outline: 0;
+}
+
+.form-floating > .form-control:not(:-moz-placeholder-shown) ~ label {
+  opacity: 1;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  height: auto;
+  padding: 0px;
+  padding: 0px 0px 0px 10px;
+  width: 100%;
+  transform: scale(0.982) translateY(0.045rem) translateX(0.1rem);
+  border-radius: 5px 0 0 0;
+}
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select ~ label {
+  opacity: 1;
+  height: auto;
+  padding: 0px 0px 0px 10px;
+  width: 100%;
+  transform: scale(0.982) translateY(0.045rem) translateX(0.1rem);
+  border-radius: 5px 0 0 0;
+}
+.form-floating > .form-control:-webkit-autofill ~ label {
+  opacity: 1;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  height: auto;
+  padding: 0px;
+  padding: 0px 0px 0px 10px;
+  width: 100%;
+  transform: scale(0.982) translateY(0.045rem) translateX(0.1rem);
+  border-radius: 5px 0 0 0;
 }

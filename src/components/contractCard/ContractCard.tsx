@@ -17,6 +17,12 @@ interface ContractCardProps {
 }
 
 const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contractAdress, onDelete }) => {
+    const selectedChain = useChain();
+    const switchChain = useSwitchChain();
+    const connectedWalletAddress = useAddress();
+
+    const [readConsoleText, setReadConsoleText] = useState("");
+    const [writeConsoleText, setWriteConsoleText] = useState("");
 
     const [showAdditionalElements, setShowAdditionalElements] = useState(true);
 
@@ -47,14 +53,57 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
         return `${prefix}...${suffix}`;
       }
     
-    const readFunctions = abi.filter((item: { constant: any; }) => item.constant);
+    const readFunctions = abi.filter((item: { stateMutability: string; }) => item.stateMutability == "view");
     const writeFunctions = abi.filter(
-        (item: { constant: any; type: string }) =>
-          !item.constant
+        (item: { stateMutability: string; type: string }) =>
+          (item.stateMutability == "nonpayable" || item.stateMutability == "payable")
           && item.type !== 'fallback' //Used to ignore the fallback function.
           && item.type !== 'constructor' //Used to ignore the constructor function.
       );
-    
+      
+
+    const switchToThisChain = async () => {
+        try{
+            await switchChain(chainInfo.id)
+        }catch{
+            await Swal.fire(
+                "Error!",
+                "Failed to switch the network.",
+                "error"
+                );
+            return
+        }
+    }
+
+    function handleFunctionCallButton(funcName: string, inputValues: { [key: string]: string; }, type: string, paybleValue: string): void {
+        if(isContractInstanceLoading || !contractAdress){
+            return;
+        }else if(selectedChain?.chainId != chainInfo.id){
+            switchToThisChain();
+            return;
+        }
+        console.log(paybleValue)
+
+        let data = [];
+        for(var i in inputValues) {
+            if(i != "value"){
+                data.push(inputValues[i]);
+            }
+        }
+        // console.log(data);
+
+        // let results;
+        // try{
+        //     results = (
+        //         await contractInstance?.call(funcName, [
+        //         connectedWalletAddress,
+        //         abi
+        //         ])
+        //     );
+        // }catch{
+
+        // }
+    }
 
     return (
     <div>
@@ -98,13 +147,14 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
                         <div className='col-12 col-lg-8'>
                             {readFunctions.map((func: any, index: number) => (
                                 <React.Fragment key={func.name}>
-                                    <ContractFunctions name={func.name} type="read" inputs={func.inputs || []} />
+                                    <ContractFunctions name={func.name} type="read" inputs={func.inputs || []} isPayable={false} onFuncall={handleFunctionCallButton} />
                                     {index !== readFunctions.length - 1 && <hr className='mt-3' style={{ width: "90%", margin: "auto" }} />}
                                 </React.Fragment>
                             ))}
                         </div>
                         <div className='col-12 col-lg-4 mt-3 mt-lg-0 bg-dark'>
                             <h1>Terminal</h1>
+                            {String(isContractInstanceLoading)}
                         </div>
                     </div>
                     <h3 className='mt-5'>Write Functions</h3>
@@ -112,7 +162,7 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
                         <div className='col-12 col-lg-8'>
                             {writeFunctions.map((func: any, index: number) => (
                                 <React.Fragment key={func.name}>
-                                    <ContractFunctions name={func.name} type="write" inputs={func.inputs || []} />
+                                    <ContractFunctions name={func.name} type="write" inputs={func.inputs || []} isPayable={func.stateMutability == "payable"} onFuncall={handleFunctionCallButton}/>
                                     {index !== writeFunctions.length - 1 && <hr className='mt-3' style={{ width: "90%", margin: "auto" }} />}
                                 </React.Fragment>
                             ))}
