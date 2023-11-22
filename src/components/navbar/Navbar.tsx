@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ConnectWallet } from "@thirdweb-dev/react";
 import { FaGithub } from "react-icons/fa";
+import Link from 'next/link';
 
 const Navbar: React.FC = () => {
 
@@ -41,10 +42,10 @@ const Navbar: React.FC = () => {
                 >
                 <ul className="navbar-nav me-auto">
                     <li className="nav-item">
-                    <a className="nav-link active" href="/">
+                    <Link className="nav-link active" href="/">
                         Home
                         <span className="visually-hidden">(current)</span>
-                    </a>
+                    </Link>
                     </li>
                     <li className="nav-item">
                     <a onClick={scrollToFooter} className="nav-link active" style={{cursor: "pointer"}}>

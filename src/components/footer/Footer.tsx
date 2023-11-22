@@ -2,17 +2,20 @@ import React from 'react'
 import { FaGithub } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { BiSolidCoffee } from "react-icons/bi";
+import Image from 'next/image'
 
 function Footer() {
   return (
     <footer className="bg-dark text-light py-4" style={{marginTop: "5rem"}}>
       <div className="container">
         <div className="row align-items-center">
-          <a className="col-6 text-center" href='https://github.com/SoroushXYZ'>
-            <FaGithub size={50}/>
-          </a>
+          <div className='col-6 text-center'>
+            <a href='https://github.com/SoroushXYZ'>
+              <FaGithub size={50}/>
+            </a>
+          </div>
           <div className="col-6 text-center">
-            <img src="/images/XYZ.png" alt="XYZ Logo" style={{height: "60px"}}/>
+          <Image src="/images/XYZ.png" alt="XYZ Logo" width={60} height={60} />
           </div>
         </div>
         <div className="row mt-3">
