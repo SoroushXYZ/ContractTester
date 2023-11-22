@@ -7,13 +7,13 @@ This Next.js TypeScript application allows you to interact with smart contracts 
 1. Install dependencies:
 
 ```
-npm install
+yarn install
 ```
 
 2. Run the application:
 
 ```
-npm run dev
+yarn dev
 ```
 
 ## Setup
