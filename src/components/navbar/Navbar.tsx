@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
                     </a>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="https://github.com/SoroushXYZ">
+                    <a className="nav-link" href="https://github.com/SoroushXYZ/ContractTester">
                         <FaGithub size={30} />
                     </a>
                     </li>

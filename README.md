@@ -2,6 +2,8 @@
 
 This Next.js TypeScript application allows you to interact with smart contracts on various blockchains. It utilizes the [ThirdWeb library](https://github.com/thirdweb-dev) to manage blockchain functionality.
 
+Find the running app [here](https://github.com/SoroushXYZ/ContractTester).
+
 ## Usage
 
 1. Install dependencies:

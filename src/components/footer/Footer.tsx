@@ -9,7 +9,7 @@ function Footer() {
       <div className="container">
         <div className="row align-items-center">
           <div className='col-6 text-center'>
-            <a href='https://github.com/SoroushXYZ'>
+            <a href='https://github.com/SoroushXYZ/ContractTester'>
               <FaGithub size={50}/>
             </a>
           </div>
