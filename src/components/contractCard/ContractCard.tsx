@@ -57,15 +57,27 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
         const prefix = address.slice(0, 3);
         const suffix = address.slice(-5);
         return `${prefix}...${suffix}`;
-      }
+    }
+
+    let readFunctions;
+    let writeFunctions;
     
-    const readFunctions = abi.filter((item: { stateMutability: string; }) => item.stateMutability == "view");
-    const writeFunctions = abi.filter(
-        (item: { stateMutability: string; type: string }) =>
-          (item.stateMutability == "nonpayable" || item.stateMutability == "payable")
-          && item.type !== 'fallback' //Used to ignore the fallback function.
-          && item.type !== 'constructor' //Used to ignore the constructor function.
-      );
+    try{
+        readFunctions = abi.filter((item: { stateMutability: string; }) => item.stateMutability == "view");
+        writeFunctions = abi.filter(
+            (item: { stateMutability: string; type: string }) =>
+              (item.stateMutability == "nonpayable" || item.stateMutability == "payable")
+              && item.type !== 'fallback' //Used to ignore the fallback function.
+              && item.type !== 'constructor' //Used to ignore the constructor function.
+          );
+    }catch{
+        Swal.fire(
+            "Error!",
+            "Failed to parse the ABI",
+            "error"
+            );
+        onDelete(id);
+    }
     
     const logToConsole = (message: string, type: string) => {
         if(type == "read"){
