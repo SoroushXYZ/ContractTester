@@ -4,8 +4,14 @@ import Swal from "sweetalert2";
 import "@sweetalert2/theme-dark";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
+import { AiOutlineClear } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
 import ContractFunctions from '../contractFunctions/ContractFunctions';
+import Editor from 'react-simple-code-editor';
+import { highlight, languages } from 'prismjs';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-json';
+import sampleABI from '../contractManager/sampleABI.json'
 
 
 interface ContractCardProps {
@@ -21,8 +27,8 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
     const switchChain = useSwitchChain();
     const connectedWalletAddress = useAddress();
 
-    const [readConsoleText, setReadConsoleText] = useState("");
-    const [writeConsoleText, setWriteConsoleText] = useState("");
+    const [readConsoleText, setReadConsoleText] = useState("Logger for solidity `view` functions");
+    const [writeConsoleText, setWriteConsoleText] = useState("Logger for solidity `write` functions");
 
     const [showAdditionalElements, setShowAdditionalElements] = useState(true);
 
@@ -60,7 +66,14 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
           && item.type !== 'fallback' //Used to ignore the fallback function.
           && item.type !== 'constructor' //Used to ignore the constructor function.
       );
-      
+    
+    const logToConsole = (message: string, type: string) => {
+        if(type == "read"){
+            setReadConsoleText(prevLogs => `${prevLogs}\n${message}\n`);
+        }else if(type == "write"){
+            setWriteConsoleText(prevLogs => `${prevLogs}\n${message}\n`);
+        }
+    }; 
 
     const switchToThisChain = async () => {
         try{
@@ -104,8 +117,17 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
             }
             console.log(results)
         }catch (e){
-            console.log(e)
+            logToConsole(funcName + " =>\n" + String(e), type);
+            return;
         }
+        logToConsole(funcName + " =>\n" + results, type);
+    }
+
+    function handleCleanReadTerminal(): void {
+        setReadConsoleText("")
+    }
+    function handleCleanWriteTerminal(): void {
+        setWriteConsoleText("")
     }
 
     return (
@@ -155,9 +177,20 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
                                 </React.Fragment>
                             ))}
                         </div>
-                        <div className='col-12 col-lg-4 mt-3 mt-lg-0 bg-dark'>
-                            <h1>Terminal</h1>
-                            {String(isContractInstanceLoading)}
+                        <div className='col-12 col-lg-4 mt-3 mt-lg-0 p-0'>
+                            <div className="d-flex justify-content-between bg-dark3 py-2">
+                                <h5 className="mx-3 my-0">Logs</h5>
+                                {/* <span className="mx-2 my-0">00</span> */}
+                                <a className='mx-3' onClick={handleCleanReadTerminal} style={{cursor: "pointer"}}>
+                                    <AiOutlineClear color='white' size={25}/>
+                                </a>
+                            </div>
+                            <textarea
+                                value={readConsoleText}
+                                readOnly
+                                className="form-control bg-black"
+                                rows={15}
+                            ></textarea>
                         </div>
                     </div>
                     <h3 className='mt-5'>Write Functions</h3>
@@ -170,8 +203,20 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
                                 </React.Fragment>
                             ))}
                         </div>
-                        <div className='col-12 col-lg-4 mt-3 mt-lg-0 bg-dark'>
-                            <h1>Terminal</h1>
+                        <div className='col-12 col-lg-4 mt-3 mt-lg-0 p-0'>
+                            <div className="d-flex justify-content-between bg-dark3 py-2">
+                                <h5 className="mx-3 my-0">Logs</h5>
+                                {/* <span className="mx-2 my-0">00</span> */}
+                                <a className='mx-3' onClick={handleCleanWriteTerminal} style={{cursor: "pointer"}}>
+                                    <AiOutlineClear color='white' size={25}/>
+                                </a>
+                            </div>
+                            <textarea
+                                value={writeConsoleText}
+                                readOnly
+                                className="form-control bg-black"
+                                rows={15}
+                            ></textarea>
                         </div>
                     </div>
                 </div>
