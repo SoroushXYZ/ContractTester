@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ActiveChain setActiveChain={setActiveChain}/>
       <Head>
         <title>Contract Tester</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="./favicon.ico" />
       </Head>
       <ParticleBackground />
       <Navbar />
