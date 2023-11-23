@@ -6,6 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineClear } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
+import { MdContentCopy } from "react-icons/md";
 import ContractFunctions from '../contractFunctions/ContractFunctions';
 
 
@@ -137,6 +138,13 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
         setWriteConsoleText("")
     }
 
+    function handleCopyContractAddressButton(): void {
+        navigator.clipboard.writeText(contractAdress)
+        .catch((err) => {
+            console.error('Unable to copy text to clipboard', err);
+        });
+    }
+
     return (
     <div>
         <div className='px-4 py-2 mt-4 bg-dark2 rounded-4'>
@@ -151,7 +159,13 @@ const ContractCard: React.FC<ContractCardProps> = ({ id, chainInfo, abi, contrac
                             )}
                         </a>
                         <div className='col-10'>
-                            <h6 className='m-0'>{shortenAddress(contractAdress)}</h6>
+                            <h6 className='m-0'>
+                                {shortenAddress(contractAdress)}
+                                <a onClick={handleCopyContractAddressButton} className='mx-1 px-1' style={{cursor: "pointer"}}>
+                                    <MdContentCopy size={15}/>
+                                </a>
+                            
+                            </h6>
                         </div>
                     </div>
                 </div>
